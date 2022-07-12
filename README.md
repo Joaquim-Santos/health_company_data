@@ -72,7 +72,7 @@ A aplicação também pode ser iniciada em container, utilizando o Dockerfile do
 
 **docker run --env-file env.list**
 
-Este arquivo deve usar a sintaxe <variable>=value, que define a variável para o valor fornecido.
+Este arquivo deve usar a sintaxe **variable=value**, que define a variável para o valor fornecido.
 
 ## Swagger
 
