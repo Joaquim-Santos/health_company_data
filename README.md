@@ -27,7 +27,7 @@ Ative seu virtualenv
 Instale os requirements
 
 ```bash
-pip install -r requirements_dev.txt
+pip install -r requirements.txt
 
 ```
 
@@ -41,7 +41,7 @@ pip install -r requirements_dev.txt
 Para instalar as dependências:
 
 - Pressione Ctrl+Alt+S para abrir as configurações e selecione **Tools > Python Integrated Tools**.
-- No campo **Package requirements file,** selecione o arquivo ****requirements_dev.txt
+- No campo **Package requirements file,** selecione o arquivo ****requirements.txt
 - Ao confirmar, aparecerá uma mensagem na IDE para instalar as dependências no arquivo, basta selecionar **Install requirements**
 
 ## Variáveis de Ambiente
