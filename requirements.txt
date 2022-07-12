@@ -1,0 +1,17 @@
+cryptography
+flasgger
+Flask
+Flask-Compress
+Flask-Migrate
+Flask-RESTful
+Flask-Script
+Flask-SQLAlchemy
+itsdangerous
+jinja2
+marshmallow
+pytest
+pytest-cov
+pytest-flask
+python-dotenv
+SQLAlchemy==1.4.26
+Werkzeug
