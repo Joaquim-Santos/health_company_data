@@ -1,0 +1,21 @@
+info:
+  title: health-company-data
+  description: API REST privada para fornecimento de informações cadastrais e financeiras de uma empresa de saúde, 
+               através de um serviço de backend python.
+  version: 1
+
+servers:
+  - url: localhost:5000
+    description: Servidor de desenvolvimento local
+#  - url: https://health-company-data-api-dev.com # desenvolvimento e produção apenas simbólicos no momento.
+#    description: Servidor de desenvolvimento da aplicação (Development)
+#  - url: https://health-company-data-api.com
+#    description: Servidor de produção da aplicação (Production)
+
+tags:
+  - name: health
+    description: Verifica se o sistema está ativo.
+  - name: logs_files
+    description: Retorna a lista de arquivos de logs da aplicação.
+  - name: logs_filename
+    description: Retorna um arquivo de log da aplicação.
