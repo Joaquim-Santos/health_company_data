@@ -6,36 +6,10 @@ from flask_restful import Resource
 from health_company_data_api.common.exceptions import MethodNotAllowed
 
 
-class AbstractResource(Resource):
+class BaseResource(Resource):
     """
         Classe abstrata para criar recursos.
     """
-    @property
-    def service_module(self):
-        """
-            String para o caminho do módulo do serviço.
-        """
-        raise NotImplementedError
-
-    @property
-    def service_class(self):
-        """
-            String para o nome da classe do serviço.
-        """
-        raise NotImplementedError
-
-    def get_service(self):
-        """
-            Método para retornar uma instância do módulo de serviço.
-
-            Returns
-            ----------
-            Object
-                Uma instância do serviço especificado no atributo 'service_class'.
-        """
-        service_class = getattr(importlib.import_module(self.service_module), self.service_class)
-        return service_class()
-
     def get(self):
         """
             Método para lidar com requisição HTTP GET.
@@ -70,3 +44,34 @@ class AbstractResource(Resource):
 
        """
         return request.headers
+
+
+class AbstractResource(BaseResource):
+    """
+        Extende a classe abstrata para criar recursos, adicionando chamada de camada de serviço.
+    """
+    @property
+    def service_module(self):
+        """
+            String para o caminho do módulo do serviço.
+        """
+        raise NotImplementedError
+
+    @property
+    def service_class(self):
+        """
+            String para o nome da classe do serviço.
+        """
+        raise NotImplementedError
+
+    def get_service(self):
+        """
+            Método para retornar uma instância do módulo de serviço.
+
+            Returns
+            ----------
+            Object
+                Uma instância do serviço especificado no atributo 'service_class'.
+        """
+        service_class = getattr(importlib.import_module(self.service_module), self.service_class)
+        return service_class()

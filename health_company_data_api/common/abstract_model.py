@@ -4,7 +4,7 @@ from sqlalchemy.orm.state import InstanceState
 from health_company_data_api.common.serializer import Serializer
 
 
-class AbstractModel(ABC):
+class AbstractModel:
     """
         Classe abstrata para criar modelos.
     """

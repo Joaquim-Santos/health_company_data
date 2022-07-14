@@ -116,7 +116,7 @@ def log_request_info():
 @application.after_request
 def after_request(response):
     logger.log.info(f'Resposta com sucesso do endpoint: {request.method} {request.url}\n'
-                    f'data:\n{response}')
+                    f'data:\n{response.json}\n')
 
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,chave-petrobras')
