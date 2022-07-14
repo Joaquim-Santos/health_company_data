@@ -10,7 +10,7 @@ class BaseConfig:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///../health_company_data_api/company_data.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///../company_data.db'
 
     LOGS_FOLDER = os.environ.get("LOGS_FOLDER")
 
