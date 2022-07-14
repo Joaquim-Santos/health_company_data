@@ -54,7 +54,7 @@ No momento, as variáveis de ambiente necessárias para execução do projeto s�
 
 # Banco de Dados
 
-Por questões de simplificação, o banco de dados foi definido como um SQLite, contido no arquivo **company_data.db**, no diretório (Python Package) **health_company_data_api**. Nesse banco, estarão todas as informações, previamente cadastradas, necessárias para consumo da API.
+Por questões de simplificação, o banco de dados foi definido como um SQLite. Desse modo, basta criar um arquivo **company_data.db**, no diretório raíz, o qual é referenciado na **SQLALCHEMY_DATABASE_URI**, na classe de configuração. Nesse banco, deverão ser cadastradas todas as informações necessárias para consumo da API.
 
 Para comunicação com o banco e realização de CRUD via ORM, foram definidas classes que mapeiam as tabelas do banco, segundo o padrão da lib **Flask-SQLAlchemy**, as quais estão definidas no pacote **models**. Assim sendo, pode-se executar o script **manager.py** para realizar a migração e adicionar os modelos do projeto como tabelas no banco. Para tanto, esse script deve ser executado com os parâmetros, em ordem:
 
@@ -62,7 +62,7 @@ Para comunicação com o banco e realização de CRUD via ORM, foram definidas c
 2. db migrate
 3. db upgrade
 
-Isso pode ser feito para fins de refletir mudanças, não sendo necessário para uso da aplicação, visto que toda base já se encontra consolidada.
+Isso gerará a estrutura do banco para o SQLite definido na configuração. Então, basta inserir alguns dados para consmo da API. Devido à simplicidade, basta adicionar os dados via query, em alguma IDE de banco, como **DBeaver**.
 
 # Execução
 
