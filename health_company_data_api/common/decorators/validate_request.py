@@ -20,12 +20,19 @@ def validate_request(func):
         if send_access_token != real_access_token:
             raise CustomerNotIdentified("Token de acesso inválido.")
 
-        username = UsersService().authenticate_user(authorization)
+        if '/api/signup' in request.url:
+            kwargs['user_credentials'] = {
+                'authorization': authorization,
+                'access-token': send_access_token
+            }
+        else:
+            username = UsersService().authenticate_user(authorization)
 
-        kwargs['user_credentials'] = {
-                    'username': username,
-                    'access-token': send_access_token
-                }
+            kwargs['user_credentials'] = {
+                        'username': username,
+                        'access-token': send_access_token
+                    }
+
         return func(*args, **kwargs)
 
     return wrapper_validate_request

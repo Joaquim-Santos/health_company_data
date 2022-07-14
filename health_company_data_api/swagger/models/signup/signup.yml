@@ -1,0 +1,18 @@
+tags:
+  - signup
+
+summary: Registra o usuário na base de dados, após validar seu token de acesso. Deve receber o nome de usuário e senha,
+         os quais serão codificados e enviados no cabeçalho. Isso é feito automaticamente pelo método utilizado nas 
+         definições de segurança.
+
+responses:
+  200:
+    description: OK
+  400:
+    description: BAD REQUEST
+  401:
+    description: UNAUTHORIZED
+  422:
+    description: UNPROCESSABLE ENTITY
+  500:
+    description: INTERNAL SERVER ERROR

@@ -1,4 +1,7 @@
-from datetime import datetime, timedelta
+import re
+
+from base64 import b64decode
+from typing import Dict
 
 
 class Utils:
@@ -7,54 +10,60 @@ class Utils:
     """
 
     @staticmethod
-    def get_timestamp_number_from_some_day_before_now(days: int):
-        """
-            Método para obter o valor numérico de timestamp de um determinado dia anterior ao dia atual.
+    def get_decoded_user_and_password(authorization: str) -> Dict[str, str]:
+        user_and_password = b64decode(authorization).decode()
+        username = user_and_password.split(':')[0]
+        password = ':'.join(user_and_password.split(':')[1:])
 
-            Parameters
-            ----------
-            days: int
-                Quantidade de dias para subtrair da data atual.
-
-            Returns
-            ----------
-            int
-                Timestamp do dia obtido.
-        """
-        target_day = (datetime.today() - timedelta(days=days)).replace(hour=0, minute=0, second=0, microsecond=0)
-        return int(datetime.timestamp(target_day))
+        return {
+            'username': username,
+            'password': password
+        }
 
     @staticmethod
-    def convert_timestamp_number_to_datetime(timestamp: int):
+    def password_check(password: str) -> Dict[str, bool]:
         """
-            Método para converter o valor de timestamp numérico de uma data para o dia correspondente,
-            no formato de objeto datetime.
-
-            Parameters
-            ----------
-            timestamp: int
-                Valor em timestamp a ser convertido.
-
-            Returns
-            ----------
-            datetime
-                Objeto datetime correspondente ao timestamp informado.
+        Verifica a 'força' da senha. Retorna um dicionário indicando o critério inválido.
+        Uma senha é considerada forte se tem pelo menos:
+            Tamanho de 8 caracteres.
+            1 número.
+            1 símbolo especial.
+            1 letra maiúscula.
+            1 letra minúscula.
         """
-        return datetime.fromtimestamp(timestamp).replace(hour=0, minute=0, second=0, microsecond=0)
+
+        # Verificação de tamanho.
+        length_error = len(password) < 8
+
+        # Busca por números.
+        digit_error = re.search(r"\d", password) is None
+
+        # Busca por letras maiúsculas.
+        uppercase_error = re.search(r"[A-Z]", password) is None
+
+        # Busca por letras minúsculas.
+        lowercase_error = re.search(r"[a-z]", password) is None
+
+        # Busca por caracteres especiais.
+        symbol_error = re.search(r"[ !#$%&@:'()*+,-./[\\\]^_`{|}~" + r'"]', password) is None
+
+        # Resultado geral
+        password_ok = not (length_error or digit_error or uppercase_error or lowercase_error or symbol_error)
+
+        return {
+            'password_ok': password_ok,
+            'length_error': length_error,
+            'digit_error': digit_error,
+            'uppercase_error': uppercase_error,
+            'lowercase_error': lowercase_error,
+            'symbol_error': symbol_error,
+        }
 
     @staticmethod
-    def get_datetime_from_some_day_before_now(days: int):
+    def username_check(username: str) -> bool:
         """
-            Método para obter a data de um determinado dia anterior ao dia atual.
-
-            Parameters
-            ----------
-            days: int
-                Quantidade de dias para subtrair da data atual.
-
-            Returns
-            ----------
-            datetime
-                Data do dia obtido.
+        Verifica se um nome de usuário possui caracteres não permitidos.
+        O nome pode conter apenas letras, números e underline.
         """
-        return (datetime.today() - timedelta(days=days)).replace(hour=0, minute=0, second=0, microsecond=0)
+
+        return re.search(r"[ !#$%&@:'()*+,-./[\\\]^`{|}~" + r'"]', username) is None

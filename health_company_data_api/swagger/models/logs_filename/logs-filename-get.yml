@@ -18,5 +18,7 @@ responses:
     description: UNAUTHORIZED
   404:
     description: NOT FOUND
+  422:
+    description: UNPROCESSABLE ENTITY
   500:
     description: INTERNAL SERVER ERROR

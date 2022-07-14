@@ -6,5 +6,5 @@ class UsersModel(db.Model, AbstractModel):
     __tablename__ = 'users'
 
     uuid = db.Column(db.String(256), nullable=False, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
+    username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)

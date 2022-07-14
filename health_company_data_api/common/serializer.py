@@ -28,7 +28,7 @@ class Serializer:
                 Se o tipo do elemento não pode ser identificado durante a serialização.
         """
         if type(element) is str or type(element) is int or type(element) is float or type(element) is bool or \
-           type(element) is list or element is None:
+           type(element) is list or type(element) is bytes or element is None:
             return element
         if type(element) is dict:
             return json.dumps(element, indent=4, sort_keys=True, default=str)
@@ -38,7 +38,7 @@ class Serializer:
             return element.strftime('%Y-%m-%d')
         elif type(element) is datetime:
             return datetime.isoformat(element)
-        elif type(element) is InstanceState or type(element) is bytes:
+        elif type(element) is InstanceState:
             return None
         else:
             raise TypeNotIdentified(f'Cannot identify type: {type(element)}')

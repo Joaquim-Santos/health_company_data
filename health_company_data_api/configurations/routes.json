@@ -59,6 +59,25 @@
             }
           }
         ]
+      },
+       {
+        "name": "signup",
+        "flask": {
+          "resourceModule": "health_company_data_api.resources",
+          "resourceClass": "SignUpResource",
+          "strictSlashes": false
+        },
+        "methods": [
+          {
+            "path": "/signup",
+            "cors": {
+              "enable": true,
+              "allowHeaders": ["*"],
+              "origins": "*",
+              "methods": ["POST"]
+            }
+          }
+        ]
       }
     ]
   }

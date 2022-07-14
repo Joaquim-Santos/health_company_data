@@ -31,3 +31,5 @@ tags:
     description: Retorna a lista de arquivos de logs da aplicação.
   - name: logs_filename
     description: Retorna um arquivo de log da aplicação.
+  - name: signup
+    description: Realiza o cadastro de usuários.
