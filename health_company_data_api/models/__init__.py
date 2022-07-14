@@ -1,0 +1,4 @@
+from health_company_data_api.models.patients import PatientsModel
+from health_company_data_api.models.pharmacies import PharmaciesModel
+from health_company_data_api.models.transactions import TransactionsModel
+from health_company_data_api.models.users import UsersModel
