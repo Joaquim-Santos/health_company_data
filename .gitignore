@@ -2,6 +2,7 @@ venv/
 logs/
 
 *.pyc
+*.db
 __pycache__/
 .idea/
 
