@@ -16,7 +16,10 @@ class SignUpResource(AbstractResource):
     def post(self, **kwargs):
         user_schema = UserPostSchema()
         try:
-            user = user_schema.load(kwargs['user_credentials'])
+            user_credentials = {
+                'authorization': self.get_headers_request().get('Authorization', '')
+            }
+            user = user_schema.load(user_credentials)
         except ValidationError as error:
             raise BadRequest(message=error.messages) from error
 

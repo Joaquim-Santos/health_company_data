@@ -19,7 +19,7 @@ class UserPostSchema(Schema):
             data['username'], data['password'] = Utils.get_decoded_user_and_password(data['authorization'])\
                 .values()
         except KeyError:
-            raise ValidationError("Usuário e/ou senha não informado(s).")
+            raise ValidationError("Campo de autorização não informado.")
 
         return data
 
@@ -31,6 +31,6 @@ class UserPostSchema(Schema):
         if not user_criteria:
             raise BadRequest('Nome de usuário pode conter apenas letras, números e underline.')
         if not password_criteria['password_ok']:
-            raise BadRequest('Senha não atende aos critérios de segurança', payload=password_criteria)
+            raise BadRequest('Senha não atende aos critérios de segurança.', payload=password_criteria)
 
         return data

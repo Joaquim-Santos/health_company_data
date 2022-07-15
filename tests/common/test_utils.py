@@ -7,10 +7,10 @@ from health_company_data_api.common.exceptions import BadRequest
 class TestUtils:
 
     def test_get_decoded_user_and_password_with_valid_authorization(self):
-        authorization = 'Sm9hcXVpbVNhbnRvczpOYXRoQDI2MDIyMDIw'
+        authorization = 'Sm9hcXVpbVNhbnRvczpQYXNzd29yZEB0ZXN0MTIz'
         expected_data = {
             'username': 'JoaquimSantos',
-            'password': 'Nath@26022020'
+            'password': 'Password@test123'
         }
 
         assert expected_data == Utils.get_decoded_user_and_password(authorization)
@@ -22,7 +22,7 @@ class TestUtils:
             Utils.get_decoded_user_and_password(authorization)
 
     def test_password_check_with_valid_password(self):
-        password = 'Nath@2602'
+        password = 'Pass@1234'
         expected_data = {
             'password_ok': True,
             'length_error': False,
@@ -35,7 +35,7 @@ class TestUtils:
         assert expected_data == Utils.password_check(password)
 
     def test_password_check_with_length_error_and_digit_error(self):
-        password = 'Nath@!@'
+        password = 'Pass@!@'
         expected_data = {
             'password_ok': False,
             'length_error': True,
@@ -48,7 +48,7 @@ class TestUtils:
         assert expected_data == Utils.password_check(password)
 
     def test_password_check_with_uppercase_error_and_symbol_error(self):
-        password = 'nath2602'
+        password = 'pass1234'
         expected_data = {
             'password_ok': False,
             'length_error': False,
@@ -61,7 +61,7 @@ class TestUtils:
         assert expected_data == Utils.password_check(password)
 
     def test_password_check_with_lowercase_error(self):
-        password = 'NATH@2602'
+        password = 'PASS@1234'
         expected_data = {
             'password_ok': False,
             'length_error': False,
