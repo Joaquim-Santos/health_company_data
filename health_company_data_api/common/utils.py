@@ -1,7 +1,10 @@
+import binascii
 import re
 
 from base64 import b64decode
 from typing import Dict
+
+from health_company_data_api.common.exceptions import BadRequest
 
 
 class Utils:
@@ -11,9 +14,12 @@ class Utils:
 
     @staticmethod
     def get_decoded_user_and_password(authorization: str) -> Dict[str, str]:
-        user_and_password = b64decode(authorization).decode()
-        username = user_and_password.split(':')[0]
-        password = ':'.join(user_and_password.split(':')[1:])
+        try:
+            user_and_password = b64decode(authorization).decode()
+            username = user_and_password.split(':')[0]
+            password = ':'.join(user_and_password.split(':')[1:])
+        except binascii.Error as error:
+            raise BadRequest('Dados de autorização em codificação inválida de base 64.') from error
 
         return {
             'username': username,
@@ -56,7 +62,7 @@ class Utils:
             'digit_error': digit_error,
             'uppercase_error': uppercase_error,
             'lowercase_error': lowercase_error,
-            'symbol_error': symbol_error,
+            'symbol_error': symbol_error
         }
 
     @staticmethod

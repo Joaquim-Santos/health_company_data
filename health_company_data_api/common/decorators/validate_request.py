@@ -16,7 +16,7 @@ def validate_request(func):
         except KeyError:
             raise MissingData('Campos para autenticação do usuário não foram informados.')
 
-        real_access_token = os.environ.get("access_token", "")
+        real_access_token = os.environ.get("ACCESS_TOKEN", "")
         if send_access_token != real_access_token:
             raise CustomerNotIdentified("Token de acesso inválido.")
 

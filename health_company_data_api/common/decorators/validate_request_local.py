@@ -1,7 +1,7 @@
 import functools
 
 
-def validate_request(func):
+def validate_request_local(func):
     @functools.wraps(func)
     def wrapper_validate_request(*args, **kwargs):
         kwargs.update({
