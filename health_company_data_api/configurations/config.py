@@ -6,7 +6,6 @@ class BaseConfig:
 
     DEBUG = False
     PROPAGATE_EXCEPTIONS = True
-    LOCAL_VALIDATION = False
 
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
@@ -23,7 +22,6 @@ class BaseConfig:
 
 class TestConfig(BaseConfig):
     DEBUG = True
-    LOCAL_VALIDATION = True
     PRESERVE_CONTEXT_ON_EXCEPTION = False
 
     SQLALCHEMY_ECHO = True
@@ -33,7 +31,6 @@ class TestConfig(BaseConfig):
 
 class LocalConfig(BaseConfig):
     DEBUG = True
-    LOCAL_VALIDATION = True
 
     SQLALCHEMY_ECHO = True
 

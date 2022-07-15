@@ -1,0 +1,1 @@
+from health_company_data_api.schemas.user import UserPostSchema

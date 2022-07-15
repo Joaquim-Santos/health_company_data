@@ -80,7 +80,7 @@ class AbstractRepository(ABC):
         if commit_at_the_end:
             db.session.commit()
 
-    def find(self, id_):
+    def find(self, id_=None, filters=None):
         """
             Método genérico para encontrar a primeira entidade do modelo do repositório pelo id.
 
@@ -88,6 +88,9 @@ class AbstractRepository(ABC):
             ----------
             id_: int
                 Id da entidade refernte à sua chave primária.
+
+            filters
+               Filtros do SQLAlchemy para a entidade a ser encontrada.
 
             Returns
             ----------
@@ -99,13 +102,16 @@ class AbstractRepository(ABC):
             EntityNotFound
                 Se não encontrou nenhuma entidade.
         """
-        primary_key = inspect(self._get_model().__class__).primary_key[0]
-        entity = self._get_model().query.filter(primary_key == id_).first()
+        if filters is not None:
+            model = self._get_model().query.filter(filters).first()
+        else:
+            primary_key = inspect(self._get_model().__class__).primary_key[0]
+            model = self._get_model().query.filter(primary_key == id_).first()
 
-        if not entity:
+        if not model:
             raise EntityNotFound(f"Entidade {self._get_model().__tablename__} não encontrada.")
 
-        return entity.to_json()
+        return model.to_json()
 
     def all(self):
         """

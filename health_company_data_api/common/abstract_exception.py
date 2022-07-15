@@ -18,7 +18,7 @@ class AbstractException(Exception):
             Dados de payload para envio na resposta da exceção.
     """
     def __init__(self, message='Exceção abstrata.', status_code=500, payload=None):
-        Exception.__init__(self)
+        super().__init__(message)
         self.message = message
         if status_code is not None:
             self.status_code = status_code

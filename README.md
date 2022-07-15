@@ -51,6 +51,7 @@ No momento, as variáveis de ambiente necessárias para execução do projeto s�
 1. **STAGE** - Definição do ambiente de execução entre Local, Teste, Desenvolvimento ou Produção, respectivamente associados aos valores: Local, Test, Development, Production.
 2. **LOGS_FOLDER** - Caminho para o diretório onde serão gerados os arquivos de Log.
 3. **HOST, PORT** - Endereço do Host e sua porta para executar a aplicação (Padrão localhost:5000).
+4. **ACCESS_TOKEN** - Valor a ser definido para uso na autenticação.
 
 # Banco de Dados
 
@@ -82,6 +83,23 @@ Para acessar a documentação Swagger, localmente: http://localhost:5000/apidocs
 
 Serão listados os endpoints da API, cada um com uma descrição de seu objetivo e campos para entrada de parâmetros, como dados de autenticação e filtros, de modo que é possível fazer uma chamada ao endpoint por essa página, a fim de se ter uma interface mais amigável e interativa.
 
+
+## Autenticação
+
+Visando maior segurança, a API possui uma camada de autenticação para acesso a qualquer endpoint. Para tanto, é necessário informar, no cabeçalho de cada requisição, um token de acesso, bem como usuário e senha. Então, antes de seguir para o endpoint, será chamado o método de autenticação implementado, o qual irá verificar, primeiro, se o token de acesso condiz com aquele definido na variável de ambiente (Para uso local, pode ser qualquer valor). Isso foi feito para simular o uso de uma API Key, como no caso de ambiente AWS com API Gateway. 
+
+Caso haja equivalência, então será feita a etapa de verificação do usuário, que primeiro confirma se o usuário existe na base de dados, e caso negativo, informa que o usuário não foi encontrado. Somente se o encontrar, é que é feita a validação da senha. Caso essa passe, então é liberado o acesso ao endpoint. Vale destacar que os dados de usuário e senha devem ser enviados codificados em Base 64 (como feito na lib **base64**), como uma camada a mais de segurança. Portanto, são 3 etapas de validação:
+
+1. Validação do token (API Key).
+2. Verificação da existência do usuário.
+3. Validação da senha.
+
+Assim sendo, para acesso a qualquer endpoint, deve ser feito o cadastro do usuário na rota **/api/signup**. Para isso, o token de acesso também deve ser enviado nessa rota, assiim somente usuários que possuem essa chave de acesso à API podem se cadastrar, como seria feito em um ambiente de produção. Foi adicionada uma Constraint à tabela de usuários, para que não possam ser cadastrados usuários com o mesmo nome. Além disso, é feita uma verificação no nome de usuário antes do cadastro, de modo que esse deve seguir um padrão para ser aceito (e.g. sem caracteres especiais), e que seja sempre armazenado como **lower case**. De modo semelhante, a senha também é verificada quanto à sua força, devendo atender aos padrões (e.g conter números e caracteres especiais).
+
+A senha é salva no banco em formato criptografado, sendo o hash gerado pelo algoritmo da lib **flask_bcrypt**, de modo que não é possível decodificá-la posteriormente, garantindo maior segurança. Assim sendo, para fazer a validação de senha no login, é feita a checagem da senha do banco com a senha enviada, utilizando um método da própria lib, que irá comparar o hash de cada senha.
+
+Ao usar o Swagger, esses dados de autorização são automaticamente adicionados na requisição para cada rota, bastando informá-los na opção Authorize, a qual também já irá codificá-los para o envio. Essa configuração foi feita nas definições de segurança do Swagger, em seu **template.yml**.
+
 ## Logs
 
 Foi implementado um módulo para geração de **Logs** da aplicaçã.o de modo que são gerados arquivos de Log correspondentes ao dia em que a aplicação é acessada. O módulo de Log é configurado para que, a cada dia, seja usado um arquivo diferente para o registro, mantendo melhor rastreabilidade. Isso foi feito pensando em como seria útil para um ambiente de produção e desenvolvimento.  
@@ -95,6 +113,7 @@ Foram implementados testes unitários para os principais métodos, contidos no d
 1. STAGE: Test
 2. LOGS_FOLDER: Caminho para o diretório raíz do projeto.
 3. Pra conexão de banco, é definida na classe de teste, uma conexão com uma base SQLite diferente, gerada exclusivamente para os testes.
+4. ACCESS_TOKEN: token_test (pode ser qualquer valor, basta corresponder ao que estiver nos casos de teste).
 
 A estrutura dos testes é equivalente à das funcionalidades, visando:
 

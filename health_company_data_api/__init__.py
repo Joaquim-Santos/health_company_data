@@ -4,6 +4,7 @@ from flask_compress import Compress
 from flask_sqlalchemy import SQLAlchemy
 from flasgger import Swagger
 from flask import request
+from flask_bcrypt import Bcrypt
 
 from sqlalchemy.exc import IntegrityError
 from marshmallow.exceptions import ValidationError
@@ -18,6 +19,7 @@ application = Flask(__name__)
 application.config.from_object(get_config())
 Compress(application)
 
+bcrypt = Bcrypt(application)
 
 swagger = Swagger(application, template_file='swagger/template.yml')
 

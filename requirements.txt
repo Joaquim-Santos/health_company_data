@@ -1,6 +1,7 @@
 cryptography
 flasgger
 Flask==1.1.2
+flask-bcrypt
 Flask-Compress
 flask-cors
 Flask-Migrate==2.7.0

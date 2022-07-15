@@ -4,6 +4,18 @@ info:
                através de um serviço de backend python.
   version: 1
 
+securityDefinitions:
+  APIKeyHeader:
+    type: apiKey
+    name: access-token
+    in: header
+  basicAuth:
+    type: basic
+
+security:
+  - APIKeyHeader: ['access-token']
+  - basicAuth: []
+
 servers:
   - url: localhost:5000
     description: Servidor de desenvolvimento local
@@ -19,3 +31,5 @@ tags:
     description: Retorna a lista de arquivos de logs da aplicação.
   - name: logs_filename
     description: Retorna um arquivo de log da aplicação.
+  - name: signup
+    description: Realiza o cadastro de usuários.
