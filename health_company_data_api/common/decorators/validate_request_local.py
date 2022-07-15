@@ -7,7 +7,7 @@ def validate_request_local(func):
     def wrapper_validate_request(*args, **kwargs):
         if '/api/signup' in request.url:
             kwargs['user_credentials'] = {
-                'authorization': 'Sm9hcXVpbVNhbnRvczpOYXRoQDI2MDIyMDIw',
+                'authorization': 'Basic Sm9hcXVpbVNhbnRvczpOYXRoQDI2MDIyMDIw',
                 'access-token': 'token_test'
             }
         else:

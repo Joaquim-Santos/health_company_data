@@ -7,7 +7,7 @@ from health_company_data_api.common.exceptions import BadRequest
 class TestUtils:
 
     def test_get_decoded_user_and_password_with_valid_authorization(self):
-        authorization = 'Sm9hcXVpbVNhbnRvczpQYXNzd29yZEB0ZXN0MTIz'
+        authorization = 'Basic Sm9hcXVpbVNhbnRvczpQYXNzd29yZEB0ZXN0MTIz'
         expected_data = {
             'username': 'JoaquimSantos',
             'password': 'Password@test123'

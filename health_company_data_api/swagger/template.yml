@@ -33,3 +33,5 @@ tags:
     description: Retorna um arquivo de log da aplicação.
   - name: signup
     description: Realiza o cadastro de usuários.
+  - name: patients
+    description: Retorna dados de pacientes cadastrados.

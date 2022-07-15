@@ -10,7 +10,7 @@ class TestUserPostSchema:
     def init_stuff(self):
         self.schema = UserPostSchema()
         self.data = {
-            'authorization': 'dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMjM='
+            'authorization': 'Basic dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMjM='
         }
 
     def test_user_post_schema_with_valid_data(self):
@@ -26,13 +26,13 @@ class TestUserPostSchema:
         }
 
     def test_user_post_schema_with_invalid_username(self):
-        self.data['authorization'] = 'Sm9hcXVpbUBTYW50b3M6UGFzc3dvcmRAdGVzdDEyMw=='
+        self.data['authorization'] = 'Basic Sm9hcXVpbUBTYW50b3M6UGFzc3dvcmRAdGVzdDEyMw=='
 
         with pytest.raises(BadRequest, match='Nome de usuário pode conter apenas letras, números e underline.'):
             self.schema.load(self.data)
 
     def test_user_post_schema_with_invalid_password(self):
-        self.data['authorization'] = 'Sm9hcXVpbVNhbnRvczpQYXNzMTIzNDU2'
+        self.data['authorization'] = 'Basic Sm9hcXVpbVNhbnRvczpQYXNzMTIzNDU2'
 
         with pytest.raises(BadRequest, match='Senha não atende aos critérios de segurança.'):
             self.schema.load(self.data)

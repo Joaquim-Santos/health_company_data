@@ -78,6 +78,25 @@
             }
           }
         ]
+      },
+      {
+        "name": "patients",
+        "flask": {
+          "resourceModule": "health_company_data_api.resources",
+          "resourceClass": "PatientsResource",
+          "strictSlashes": false
+        },
+        "methods": [
+          {
+            "path": "/patients",
+            "cors": {
+              "enable": true,
+              "allowHeaders": ["*"],
+              "origins": "*",
+              "methods": ["GET"]
+            }
+          }
+        ]
       }
     ]
   }

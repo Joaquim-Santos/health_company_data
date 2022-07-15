@@ -37,7 +37,7 @@ class TestValidateRequest:
         request_context.push()
 
         request.headers = {
-            'Authorization': 'dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMjM='
+            'Authorization': 'Basic dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMjM='
         }
 
         @validate_request
@@ -52,7 +52,7 @@ class TestValidateRequest:
         request_context.push()
 
         request.headers = {
-            'Authorization': 'dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMjM=',
+            'Authorization': 'Basic dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMjM=',
             'access-token': 'token_t'
         }
 
@@ -68,7 +68,7 @@ class TestValidateRequest:
         request_context.push()
 
         request.headers = {
-            'Authorization': 'dXNlcl90ZXM6UGFzc3dvcmRAdGVzdDEyMw==',
+            'Authorization': 'Basic dXNlcl90ZXM6UGFzc3dvcmRAdGVzdDEyMw==',
             'access-token': 'token_test'
         }
 
@@ -84,7 +84,7 @@ class TestValidateRequest:
         request_context.push()
 
         request.headers = {
-            'Authorization': 'dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMg==',
+            'Authorization': 'Basic dXNlcl90ZXN0OlBhc3N3b3JkQHRlc3QxMg==',
             'access-token': 'token_test'
         }
 
