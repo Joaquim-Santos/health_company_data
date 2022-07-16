@@ -82,7 +82,7 @@ class AbstractRepository(ABC):
 
     def find(self, id_=None, filters=None):
         """
-            Método genérico para encontrar a primeira entidade do modelo do repositório pelo id.
+            Método genérico para encontrar a primeira entidade do modelo do repositório pelo id ou filtros.
 
             Parameters
             ----------
@@ -112,6 +112,29 @@ class AbstractRepository(ABC):
             raise EntityNotFound(f"Entidade {self._get_model().__tablename__} não encontrada.")
 
         return model.to_json()
+
+    def find_many(self, filters):
+        """
+            Método genérico para encontrar as entidades do modelo com base nos filtros.
+
+            Parameters
+            ----------
+            filters
+               Filtros do SQLAlchemy para a entidade a ser encontrada.
+
+            Returns
+            ----------
+            Object
+                Primeira entidade do modelo do repositório encontrada com oid.
+
+            Raises
+            ----------
+            EntityNotFound
+                Se não encontrou nenhuma entidade.
+        """
+        models = self._get_model().query.filter(filters).all()
+
+        return [model.to_json() for model in models]
 
     def all(self):
         """

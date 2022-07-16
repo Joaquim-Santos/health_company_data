@@ -9,14 +9,14 @@ parameters:
     name: first_name
     schema:
       type: string
-      example: joaquim
+      example: VITORIA
     required: false
 
   - in: query
     name: last_name
     schema:
       type: string
-      example: santos
+      example: SILVA
     required: false
 
   - in: query
