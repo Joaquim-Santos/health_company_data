@@ -97,4 +97,37 @@ def create_required_tables_data():
     pharmacies_model = PharmaciesModel(**pharmacies_3)
     db.session.add(pharmacies_model)
 
+    transactions_1 = {
+        'uuid': 'TRAN0001',
+        'patient_uuid': 'PATIENT0001',
+        'pharmacy_uuid': 'PHARM0001',
+        'amount': 29,
+        'timestamp': datetime(2022, 5, 1, 8, 0, 0)
+    }
+
+    transactions_model = TransactionsModel(**transactions_1)
+    db.session.add(transactions_model)
+
+    transactions_2 = {
+        'uuid': 'TRAN0002',
+        'patient_uuid': 'PATIENT0001',
+        'pharmacy_uuid': 'PHARM0002',
+        'amount': 30.5,
+        'timestamp': datetime(2022, 5, 1, 13, 0, 0)
+    }
+
+    transactions_model = TransactionsModel(**transactions_2)
+    db.session.add(transactions_model)
+
+    transactions_3 = {
+        'uuid': 'TRAN0003',
+        'patient_uuid': 'PATIENT0002',
+        'pharmacy_uuid': 'PHARM0003',
+        'amount': 40,
+        'timestamp': datetime(2022, 5, 10, 8, 0, 0)
+    }
+
+    transactions_model = TransactionsModel(**transactions_3)
+    db.session.add(transactions_model)
+
     db.session.commit()
