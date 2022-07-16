@@ -100,6 +100,22 @@ A senha é salva no banco em formato criptografado, sendo o hash gerado pelo alg
 
 Ao usar o Swagger, esses dados de autorização são automaticamente adicionados na requisição para cada rota, bastando informá-los na opção Authorize, a qual também já irá codificá-los para o envio. Essa configuração foi feita nas definições de segurança do Swagger, em seu **template.yml**.
 
+
+## Rotas
+
+Para todas as rotas foi definido um **blueprint** /api, sendo que as rotas disponíveis são:
+
+ - **/api/patients**: Retorna a lista de pacientes cadastrados na base de dados, podendo ser filtrados por nome, sobrenome 
+ e idade. Caso nenhum filtro seja passado, retorna todos os pacientes cadastrados. Para cada paciente, é retornado seu ID, nome, sobrenome e data de nascimento. Os filtros de nome e sobrenome são **case insensitive**, já o filtro de idade, pode ter um valor inicial e final, ou apenas um deles, sendo que internamente filtra as datas correspondentes ao intervalo de idade.
+ - **/api/pharmacies**: Retorna a lista de farmácias cadastradas na base de dados, podendo ser filtradas por nome e cidade. Caso nenhum filtro seja passado, retorna todas as farmácias cadastradas. Para cada farmácia, é retornado seu ID, nome e cidade. Os filtros de nome e cidade são **case insensitive**.
+ - **/api/transactions**: Retorna a lista de transações cadastradas na base de dados, podendo ser filtradas por valor e data. 
+ Caso nenhum filtro seja passado, retorna todas as transações cadastradas. Para cada transação, é retornado seu ID, quantidade e data, bem como todos os valores de pacientes e farmácias que se relacionam com a mesma. O filtro de quantidade considera valores iguais ou maiores que o valor informado, assim como o filtro de data.
+ - **/api/signup**: Registra o usuário na base de dados, após validar seu token de acesso. Deve receber o nome de usuário e senha,
+ os quais serão codificados e enviados no cabeçalho, e o token deve corresponder ao valor da variável de ambiente.
+ - **/api/health**: Exibe a data atual, mostrando que o sistema está funcionando.
+ - **/api/logs**: Retorna a lista de arquivos de logs da aplicação, correspondentes a cada dia.
+ - **/api/logs/<filename>**: Retorna um arquivo de logs da aplicação, correspondente a um dia.
+
 ## Logs
 
 Foi implementado um módulo para geração de **Logs** da aplicaçã.o de modo que são gerados arquivos de Log correspondentes ao dia em que a aplicação é acessada. O módulo de Log é configurado para que, a cada dia, seja usado um arquivo diferente para o registro, mantendo melhor rastreabilidade. Isso foi feito pensando em como seria útil para um ambiente de produção e desenvolvimento.  
