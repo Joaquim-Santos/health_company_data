@@ -5,6 +5,7 @@ logs/
 *.db
 __pycache__/
 .idea/
+env.list
 
 instance/
 
