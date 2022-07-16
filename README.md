@@ -71,9 +71,24 @@ Feitas todas as configurações, basta executar o script **application.py** para
 
 A aplicação também pode ser iniciada em container, utilizando o Dockerfile do projeto. Para tanto, tendo-se o docker instalado. deve-se definir as mesmas variáveis de ambiente citadas anteriormente. Isso pode ser feito as informando em um arquivo, como um **env.list**, e então executar o comando no diretório do Dockerfile:
 
-**docker run --env-file env.list**
+**1. Construir a imagem:**
 
-Este arquivo deve usar a sintaxe **variable=value**, que define a variável para o valor fornecido.
+docker build --tag python-docker .
+
+**2. Executar o container, informando o arquivo com as variáveis:**
+
+docker run -d -p 5000:5000 --env-file ./env.list --name=health_data_api python-docker
+
+Este arquivo deve usar a sintaxe **variable=value**, que define a variável para o valor fornecido, como no exemplo:
+
+```bash
+ACCESS_TOKEN=token-authenticacao
+LOGS_FOLDER=/python-docker
+STAGE=Local
+PORT=5000
+HOST=0.0.0.0
+```
+É recomendado o uso do host em **0.0.0.0**, a fim de expor a aplicação fora do container.
 
 ## Swagger
 
