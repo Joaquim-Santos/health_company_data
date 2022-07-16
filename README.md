@@ -114,7 +114,7 @@ Para todas as rotas foi definido um **blueprint** /api, sendo que as rotas dispo
  os quais serão codificados e enviados no cabeçalho, e o token deve corresponder ao valor da variável de ambiente.
  - **/api/health**: Exibe a data atual, mostrando que o sistema está funcionando.
  - **/api/logs**: Retorna a lista de arquivos de logs da aplicação, correspondentes a cada dia.
- - **/api/logs/<filename>**: Retorna um arquivo de logs da aplicação, correspondente a um dia.
+ - **/api/logs/\<filename\>**: Retorna um arquivo de logs da aplicação, correspondente a um dia.
 
 ## Logs
 
