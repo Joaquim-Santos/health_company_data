@@ -35,3 +35,5 @@ tags:
     description: Realiza o cadastro de usuários.
   - name: patients
     description: Retorna dados de pacientes cadastrados.
+  - name: pharmacies
+    description: Retorna dados de farmácias cadastradas.

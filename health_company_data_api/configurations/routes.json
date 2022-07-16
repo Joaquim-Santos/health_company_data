@@ -97,6 +97,25 @@
             }
           }
         ]
+      },
+      {
+        "name": "pharmacies",
+        "flask": {
+          "resourceModule": "health_company_data_api.resources",
+          "resourceClass": "PharmaciesResource",
+          "strictSlashes": false
+        },
+        "methods": [
+          {
+            "path": "/pharmacies",
+            "cors": {
+              "enable": true,
+              "allowHeaders": ["*"],
+              "origins": "*",
+              "methods": ["GET"]
+            }
+          }
+        ]
       }
     ]
   }

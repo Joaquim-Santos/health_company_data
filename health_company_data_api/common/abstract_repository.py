@@ -9,7 +9,7 @@ from health_company_data_api import db
 from health_company_data_api.common.exceptions import IntegrityException, EntityNotFound, GenericException
 
 
-class AbstractRepository(ABC):
+class BaseRepository(ABC):
     """
         Classe abstrata para criar repositórios.
     """
@@ -314,3 +314,24 @@ class AbstractRepository(ABC):
             db.session.commit()
 
         return {'mensagem': 'Entidades removidas com sucesso!'}
+
+
+class AbstractRepository(BaseRepository):
+
+    @abstractmethod
+    def _get_filter(self, field_name: str, field_value: str):
+        pass
+
+    def get_entities_by_filter(self, entities_filters: dict) -> list:
+        filters = None
+
+        for field_name, field_value in entities_filters.items():
+            try:
+                filters &= self._get_filter(field_name, field_value)
+            except TypeError:
+                filters = self._get_filter(field_name, field_value)
+
+        if filters is None:
+            return self.all()
+        else:
+            return self.find_many(filters=filters)

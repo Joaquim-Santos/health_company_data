@@ -6,13 +6,13 @@ class TestPatientsResource:
     def test_methods_not_allowed(self, client):
         responses_status = []
 
-        response = client.post("/api/health")
+        response = client.post("/api/patients")
         responses_status.append(response.status_code)
 
-        response = client.put("/api/health")
+        response = client.put("/api/patients")
         responses_status.append(response.status_code)
 
-        response = client.delete("/api/health")
+        response = client.delete("/api/patients")
         responses_status.append(response.status_code)
 
         assert responses_status == [

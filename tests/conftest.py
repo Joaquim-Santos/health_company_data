@@ -70,4 +70,31 @@ def create_required_tables_data():
     patient_model = PatientsModel(**patient_3)
     db.session.add(patient_model)
 
+    pharmacies_1 = {
+        'uuid': 'PHARM0001',
+        'name': 'DROGA MAIS',
+        'city': 'RIBEIRAO PRETO'
+    }
+
+    pharmacies_model = PharmaciesModel(**pharmacies_1)
+    db.session.add(pharmacies_model)
+
+    pharmacies_2 = {
+        'uuid': 'PHARM0002',
+        'name': 'DROGA MAIS',
+        'city': 'SAO PAULO'
+    }
+
+    pharmacies_model = PharmaciesModel(**pharmacies_2)
+    db.session.add(pharmacies_model)
+
+    pharmacies_3 = {
+        'uuid': 'PHARM0003',
+        'name': 'DROGARIA SAO SIMAO',
+        'city': 'SAO PAULO'
+    }
+
+    pharmacies_model = PharmaciesModel(**pharmacies_3)
+    db.session.add(pharmacies_model)
+
     db.session.commit()
