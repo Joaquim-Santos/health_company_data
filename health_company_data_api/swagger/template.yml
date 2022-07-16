@@ -37,3 +37,6 @@ tags:
     description: Retorna dados de pacientes cadastrados.
   - name: pharmacies
     description: Retorna dados de farmácias cadastradas.
+  - name: transactions
+    description: Retorna dados de transações cadastradas.
+

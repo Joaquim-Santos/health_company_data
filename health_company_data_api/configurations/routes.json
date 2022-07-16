@@ -116,6 +116,25 @@
             }
           }
         ]
+      },
+      {
+        "name": "transactions",
+        "flask": {
+          "resourceModule": "health_company_data_api.resources",
+          "resourceClass": "TransactionsResource",
+          "strictSlashes": false
+        },
+        "methods": [
+          {
+            "path": "/transactions",
+            "cors": {
+              "enable": true,
+              "allowHeaders": ["*"],
+              "origins": "*",
+              "methods": ["GET"]
+            }
+          }
+        ]
       }
     ]
   }

@@ -7,6 +7,7 @@ from sqlalchemy.inspection import inspect
 
 from health_company_data_api import db
 from health_company_data_api.common.exceptions import IntegrityException, EntityNotFound, GenericException
+from health_company_data_api.common.serializer import Serializer
 
 
 class BaseRepository(ABC):
@@ -113,7 +114,7 @@ class BaseRepository(ABC):
 
         return model.to_json()
 
-    def find_many(self, filters):
+    def find_many(self, filters, join_query=None):
         """
             Método genérico para encontrar as entidades do modelo com base nos filtros.
 
@@ -121,6 +122,9 @@ class BaseRepository(ABC):
             ----------
             filters
                Filtros do SQLAlchemy para a entidade a ser encontrada.
+
+            join_query
+                Opcional, sendo a definição de Joins da entidade, com base na SQLAlchemy.
 
             Returns
             ----------
@@ -132,20 +136,49 @@ class BaseRepository(ABC):
             EntityNotFound
                 Se não encontrou nenhuma entidade.
         """
-        models = self._get_model().query.filter(filters).all()
+        if join_query is None:
+            models = self._get_model().query.filter(filters).all()
 
-        return [model.to_json() for model in models]
+            return [model.to_json() for model in models]
+        else:
+            result = []
 
-    def all(self):
+            for entity in join_query.filter(filters).all():
+                entity = dict(entity)
+                del entity[self._get_model().__class__.__name__]
+
+                item = {key: Serializer.json_serialize(value) for key, value in entity.items()}
+                result.append(item)
+
+            return result
+
+    def all(self, join_query=None):
         """
             Método genérico para recuperar todas as entidades do modelo do repositório.
+
+            Parameters
+            ----------
+            join_query
+                Opcional, sendo a definição de Joins da entidade, com base na SQLAlchemy.
 
             Returns
             ----------
             Object
                 Todas as entidades existentes do modelo do repositório.
         """
-        return [item.to_json() for item in self._get_model().query.all()]
+        if join_query is None:
+            return [item.to_json() for item in self._get_model().query.all()]
+        else:
+            result = []
+
+            for entity in join_query.all():
+                entity = dict(entity)
+                del entity[self._get_model().__class__.__name__]
+
+                item = {key: Serializer.json_serialize(value) for key, value in entity.items()}
+                result.append(item)
+
+            return result
 
     def create(self, attributes, commit_at_the_end=True):
         """
@@ -322,7 +355,7 @@ class AbstractRepository(BaseRepository):
     def _get_filter(self, field_name: str, field_value: str):
         pass
 
-    def get_entities_by_filter(self, entities_filters: dict) -> list:
+    def get_entities_by_filter(self, entities_filters: dict, join_query=None) -> list:
         filters = None
 
         for field_name, field_value in entities_filters.items():
@@ -332,6 +365,6 @@ class AbstractRepository(BaseRepository):
                 filters = self._get_filter(field_name, field_value)
 
         if filters is None:
-            return self.all()
+            return self.all(join_query)
         else:
-            return self.find_many(filters=filters)
+            return self.find_many(filters=filters, join_query=join_query)
