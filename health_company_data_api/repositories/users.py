@@ -1,10 +1,10 @@
 from sqlalchemy import desc
 
-from health_company_data_api.common.abstract_repository import AbstractRepository
+from health_company_data_api.common.abstract_repository import BaseRepository
 from health_company_data_api.models import UsersModel
 
 
-class UsersRepository(AbstractRepository):
+class UsersRepository(BaseRepository):
     model_module = 'health_company_data_api.models.users'
     model_class = 'UsersModel'
 

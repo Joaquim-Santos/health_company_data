@@ -78,6 +78,63 @@
             }
           }
         ]
+      },
+      {
+        "name": "patients",
+        "flask": {
+          "resourceModule": "health_company_data_api.resources",
+          "resourceClass": "PatientsResource",
+          "strictSlashes": false
+        },
+        "methods": [
+          {
+            "path": "/patients",
+            "cors": {
+              "enable": true,
+              "allowHeaders": ["*"],
+              "origins": "*",
+              "methods": ["GET"]
+            }
+          }
+        ]
+      },
+      {
+        "name": "pharmacies",
+        "flask": {
+          "resourceModule": "health_company_data_api.resources",
+          "resourceClass": "PharmaciesResource",
+          "strictSlashes": false
+        },
+        "methods": [
+          {
+            "path": "/pharmacies",
+            "cors": {
+              "enable": true,
+              "allowHeaders": ["*"],
+              "origins": "*",
+              "methods": ["GET"]
+            }
+          }
+        ]
+      },
+      {
+        "name": "transactions",
+        "flask": {
+          "resourceModule": "health_company_data_api.resources",
+          "resourceClass": "TransactionsResource",
+          "strictSlashes": false
+        },
+        "methods": [
+          {
+            "path": "/transactions",
+            "cors": {
+              "enable": true,
+              "allowHeaders": ["*"],
+              "origins": "*",
+              "methods": ["GET"]
+            }
+          }
+        ]
       }
     ]
   }

@@ -1,0 +1,32 @@
+tags:
+  - transactions
+
+summary: Retorna a lista de transações cadastradas na base de dados, podendo ser filtradas por valor e data. 
+         Caso nenhum filtro seja passado, retorna todas as transações cadastradas.
+
+parameters:
+  - in: query
+    name: from_amount
+    schema:
+      type: number
+      example: 30.5
+    required: false
+
+  - in: query
+    name: from_timestamp
+    schema:
+      type: string
+    required: false
+
+
+responses:
+  200:
+    description: OK
+  401:
+    description: UNAUTHORIZED
+  404:
+    description: NOT FOUND
+  422:
+    description: UNPROCESSABLE ENTITY
+  500:
+    description: INTERNAL SERVER ERROR

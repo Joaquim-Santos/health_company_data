@@ -15,7 +15,9 @@ class Utils:
     @staticmethod
     def get_decoded_user_and_password(authorization: str) -> Dict[str, str]:
         try:
+            authorization = authorization.replace('Basic ', '')
             user_and_password = b64decode(authorization).decode()
+
             username = user_and_password.split(':')[0]
             password = ':'.join(user_and_password.split(':')[1:])
         except binascii.Error as error:

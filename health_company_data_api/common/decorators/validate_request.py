@@ -11,7 +11,7 @@ def validate_request(func):
     @functools.wraps(func)
     def wrapper_validate_request(*args, **kwargs):
         try:
-            authorization = request.headers['Authorization'].replace('Basic ', '')
+            authorization = request.headers['Authorization']
             send_access_token = request.headers['access-token']
         except KeyError:
             raise MissingData('Campos para autenticação do usuário não foram informados.')

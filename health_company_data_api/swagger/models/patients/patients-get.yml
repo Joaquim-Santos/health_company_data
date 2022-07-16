@@ -1,0 +1,47 @@
+tags:
+  - patients
+
+summary: Retorna a lista de pacientes cadastrados na base de dados, podendo ser filtrados por nome, sobrenome 
+         e idade. Caso nenhum filtro seja passado, retorna todos os pacientes cadastrados.
+
+parameters:
+  - in: query
+    name: first_name
+    schema:
+      type: string
+      example: VITORIA
+    required: false
+
+  - in: query
+    name: last_name
+    schema:
+      type: string
+      example: SILVA
+    required: false
+
+  - in: query
+    name: start_age
+    schema:
+      type: integer
+      example: 20
+    required: false
+
+  - in: query
+    name: end_age
+    schema:
+      type: integer
+      example: 40
+    required: false
+
+
+responses:
+  200:
+    description: OK
+  401:
+    description: UNAUTHORIZED
+  404:
+    description: NOT FOUND
+  422:
+    description: UNPROCESSABLE ENTITY
+  500:
+    description: INTERNAL SERVER ERROR

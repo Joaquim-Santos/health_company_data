@@ -23,7 +23,7 @@ class TestSignUpResource:
 
     def test_post_with_success(self, client):
         expected_data = {'username': 'joaquimsantos'}
-        headers = {'Authorization': 'Sm9hcXVpbVNhbnRvczpOYXRoQDI2MDIyMDIw'}
+        headers = {'Authorization': 'Basic Sm9hcXVpbVNhbnRvczpOYXRoQDI2MDIyMDIw'}
 
         response = client.post("/api/signup", headers=headers)
 
@@ -39,7 +39,7 @@ class TestSignUpResource:
             'symbol_error': True,
             'uppercase_error': False
         }
-        headers = {'Authorization': 'Sm9hcXVpbVNhbnRvczpQYXNzMTIzNDU2'}
+        headers = {'Authorization': 'Basic Sm9hcXVpbVNhbnRvczpQYXNzMTIzNDU2'}
 
         response = client.post("/api/signup", headers=headers)
 

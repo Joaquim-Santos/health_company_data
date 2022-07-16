@@ -1,3 +1,6 @@
 from health_company_data_api.resources.health import HealthResource
 from health_company_data_api.resources.logs import LogsResource, LogsFileNameResource
 from health_company_data_api.resources.signup import SignUpResource
+from health_company_data_api.resources.patients import PatientsResource
+from health_company_data_api.resources.pharmacies import PharmaciesResource
+from health_company_data_api.resources.transactions import TransactionsResource

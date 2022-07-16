@@ -2,6 +2,7 @@ import pytest
 import os
 
 from shutil import rmtree
+from datetime import datetime
 
 from health_company_data_api import application, db
 from health_company_data_api.models import *
@@ -38,5 +39,95 @@ def create_required_tables_data():
 
     user_model = UsersModel(**user_1)
     db.session.add(user_model)
+
+    patient_1 = {
+        'uuid': 'PATIENT0001',
+        'first_name': 'VITORIA',
+        'last_name': 'CARVALHO',
+        'date_of_birth': datetime(1990, 1, 1, 0, 0, 0, 0)
+    }
+
+    patient_model = PatientsModel(**patient_1)
+    db.session.add(patient_model)
+
+    patient_2 = {
+        'uuid': 'PATIENT0002',
+        'first_name': 'VITORIA',
+        'last_name': 'SILVA',
+        'date_of_birth': datetime(1986, 7, 12, 0, 0, 0, 0)
+    }
+
+    patient_model = PatientsModel(**patient_2)
+    db.session.add(patient_model)
+
+    patient_3 = {
+        'uuid': 'PATIENT0003',
+        'first_name': 'JOAQUIM',
+        'last_name': 'SANTOS',
+        'date_of_birth': datetime(1996, 7, 8, 0, 0, 0, 0)
+    }
+
+    patient_model = PatientsModel(**patient_3)
+    db.session.add(patient_model)
+
+    pharmacies_1 = {
+        'uuid': 'PHARM0001',
+        'name': 'DROGA MAIS',
+        'city': 'RIBEIRAO PRETO'
+    }
+
+    pharmacies_model = PharmaciesModel(**pharmacies_1)
+    db.session.add(pharmacies_model)
+
+    pharmacies_2 = {
+        'uuid': 'PHARM0002',
+        'name': 'DROGA MAIS',
+        'city': 'SAO PAULO'
+    }
+
+    pharmacies_model = PharmaciesModel(**pharmacies_2)
+    db.session.add(pharmacies_model)
+
+    pharmacies_3 = {
+        'uuid': 'PHARM0003',
+        'name': 'DROGARIA SAO SIMAO',
+        'city': 'SAO PAULO'
+    }
+
+    pharmacies_model = PharmaciesModel(**pharmacies_3)
+    db.session.add(pharmacies_model)
+
+    transactions_1 = {
+        'uuid': 'TRAN0001',
+        'patient_uuid': 'PATIENT0001',
+        'pharmacy_uuid': 'PHARM0001',
+        'amount': 29,
+        'timestamp': datetime(2022, 5, 1, 8, 0, 0)
+    }
+
+    transactions_model = TransactionsModel(**transactions_1)
+    db.session.add(transactions_model)
+
+    transactions_2 = {
+        'uuid': 'TRAN0002',
+        'patient_uuid': 'PATIENT0001',
+        'pharmacy_uuid': 'PHARM0002',
+        'amount': 30.5,
+        'timestamp': datetime(2022, 5, 1, 13, 0, 0)
+    }
+
+    transactions_model = TransactionsModel(**transactions_2)
+    db.session.add(transactions_model)
+
+    transactions_3 = {
+        'uuid': 'TRAN0003',
+        'patient_uuid': 'PATIENT0002',
+        'pharmacy_uuid': 'PHARM0003',
+        'amount': 40,
+        'timestamp': datetime(2022, 5, 10, 8, 0, 0)
+    }
+
+    transactions_model = TransactionsModel(**transactions_3)
+    db.session.add(transactions_model)
 
     db.session.commit()
