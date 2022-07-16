@@ -14,6 +14,7 @@ marshmallow
 pytest
 pytest-cov
 pytest-flask
+python-dateutil
 python-dotenv
 SQLAlchemy==1.4.26
 Werkzeug==2.0.2

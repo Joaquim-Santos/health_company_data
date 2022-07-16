@@ -2,6 +2,7 @@ import pytest
 import os
 
 from shutil import rmtree
+from datetime import datetime
 
 from health_company_data_api import application, db
 from health_company_data_api.models import *
@@ -38,5 +39,35 @@ def create_required_tables_data():
 
     user_model = UsersModel(**user_1)
     db.session.add(user_model)
+
+    patient_1 = {
+        'uuid': 'PATIENT0001',
+        'first_name': 'VITORIA',
+        'last_name': 'CARVALHO',
+        'date_of_birth': datetime(1990, 1, 1, 0, 0, 0, 0)
+    }
+
+    patient_model = PatientsModel(**patient_1)
+    db.session.add(patient_model)
+
+    patient_2 = {
+        'uuid': 'PATIENT0002',
+        'first_name': 'VITORIA',
+        'last_name': 'SILVA',
+        'date_of_birth': datetime(1986, 7, 12, 0, 0, 0, 0)
+    }
+
+    patient_model = PatientsModel(**patient_2)
+    db.session.add(patient_model)
+
+    patient_3 = {
+        'uuid': 'PATIENT0003',
+        'first_name': 'JOAQUIM',
+        'last_name': 'SANTOS',
+        'date_of_birth': datetime(1996, 7, 8, 0, 0, 0, 0)
+    }
+
+    patient_model = PatientsModel(**patient_3)
+    db.session.add(patient_model)
 
     db.session.commit()

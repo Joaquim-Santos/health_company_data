@@ -16,13 +16,13 @@ class PatientsRepository(AbstractRepository):
             'first_name': (func.lower(PatientsModel.first_name) == func.lower(field_value)),
             'last_name': (func.lower(PatientsModel.last_name) == func.lower(field_value)),
             'start_age': (PatientsModel.date_of_birth <= field_value),
-            'end_age': (PatientsModel.date_of_birth >= field_value)
+            'end_age': (PatientsModel.date_of_birth > field_value)
         }
 
         return model_filters[field_name]
 
     def get_patients(self, patients_filters: dict) -> list:
-        filters = ()
+        filters = None
 
         for field_name, field_value in patients_filters.items():
             try:
@@ -30,4 +30,7 @@ class PatientsRepository(AbstractRepository):
             except TypeError:
                 filters = self._get_filter(field_name, field_value)
 
-        return self.find_many(filters=filters)
+        if filters is None:
+            return self.all()
+        else:
+            return self.find_many(filters=filters)

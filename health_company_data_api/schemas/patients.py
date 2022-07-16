@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from marshmallow import Schema, fields, EXCLUDE, validate, post_load
 from marshmallow.exceptions import ValidationError
@@ -21,6 +21,12 @@ class PatientsFiltersSchema(Schema):
         try:
             if data_without_none['start_age'] > data_without_none['end_age']:
                 raise ValidationError("Idade inicial não pode ser maior do que a final.")
+        except KeyError:
+            pass
+
+        # Engloba quem ainda não completou a idade máxima no anoa atual.
+        try:
+            data_without_none['end_age'] += 1
         except KeyError:
             pass
 

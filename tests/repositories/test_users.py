@@ -1,7 +1,4 @@
-import pytest
-
 from health_company_data_api.repositories.users import UsersRepository
-from health_company_data_api.common.exceptions import IntegrityException
 
 
 class TestUsersRepository:
