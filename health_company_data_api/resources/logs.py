@@ -9,7 +9,6 @@ from health_company_data_api.common.decorators import validate_request
 
 
 class LogsResource(BaseResource):
-
     @validate_request
     @swag_from("../swagger/models/logs_files/logs-files.yml", endpoint="api.logs")
     def get(self, **kwargs):
@@ -18,9 +17,13 @@ class LogsResource(BaseResource):
 
 
 class LogsFileNameResource(BaseResource):
-
     @validate_request
-    @swag_from("../swagger/models/logs_filename/logs-filename-get.yml", endpoint="api.logs_filename")
+    @swag_from(
+        "../swagger/models/logs_filename/logs-filename-get.yml",
+        endpoint="api.logs_filename",
+    )
     def get(self, **kwargs):
-        content = load_file(get_config().LOGS_FOLDER, request.view_args['filename'], False)
+        content = load_file(
+            get_config().LOGS_FOLDER, request.view_args["filename"], False
+        )
         return Response(content, mimetype="application/text")

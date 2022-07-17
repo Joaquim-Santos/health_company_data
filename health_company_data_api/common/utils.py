@@ -9,24 +9,23 @@ from health_company_data_api.common.exceptions import BadRequest
 
 class Utils:
     """
-        Classe que fornece métodos genéricos úteis.
+    Classe que fornece métodos genéricos úteis.
     """
 
     @staticmethod
     def get_decoded_user_and_password(authorization: str) -> Dict[str, str]:
         try:
-            authorization = authorization.replace('Basic ', '')
+            authorization = authorization.replace("Basic ", "")
             user_and_password = b64decode(authorization).decode()
 
-            username = user_and_password.split(':')[0]
-            password = ':'.join(user_and_password.split(':')[1:])
+            username = user_and_password.split(":")[0]
+            password = ":".join(user_and_password.split(":")[1:])
         except binascii.Error as error:
-            raise BadRequest('Dados de autorização em codificação inválida de base 64.') from error
+            raise BadRequest(
+                "Dados de autorização em codificação inválida de base 64."
+            ) from error
 
-        return {
-            'username': username,
-            'password': password
-        }
+        return {"username": username, "password": password}
 
     @staticmethod
     def password_check(password: str) -> Dict[str, bool]:
@@ -53,18 +52,26 @@ class Utils:
         lowercase_error = re.search(r"[a-z]", password) is None
 
         # Busca por caracteres especiais.
-        symbol_error = re.search(r"[ !#$%&@:'()*+,-./[\\\]^_`{|}~" + r'"]', password) is None
+        symbol_error = (
+            re.search(r"[ !#$%&@:'()*+,-./[\\\]^_`{|}~" + r'"]', password) is None
+        )
 
         # Resultado geral
-        password_ok = not (length_error or digit_error or uppercase_error or lowercase_error or symbol_error)
+        password_ok = not (
+            length_error
+            or digit_error
+            or uppercase_error
+            or lowercase_error
+            or symbol_error
+        )
 
         return {
-            'password_ok': password_ok,
-            'length_error': length_error,
-            'digit_error': digit_error,
-            'uppercase_error': uppercase_error,
-            'lowercase_error': lowercase_error,
-            'symbol_error': symbol_error
+            "password_ok": password_ok,
+            "length_error": length_error,
+            "digit_error": digit_error,
+            "uppercase_error": uppercase_error,
+            "lowercase_error": lowercase_error,
+            "symbol_error": symbol_error,
         }
 
     @staticmethod

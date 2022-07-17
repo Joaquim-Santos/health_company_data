@@ -2,7 +2,6 @@ from http import HTTPStatus
 
 
 class TestPharmaciesResource:
-
     def test_methods_not_allowed(self, client):
         responses_status = []
 
@@ -18,14 +17,14 @@ class TestPharmaciesResource:
         assert responses_status == [
             HTTPStatus.METHOD_NOT_ALLOWED,
             HTTPStatus.METHOD_NOT_ALLOWED,
-            HTTPStatus.METHOD_NOT_ALLOWED
+            HTTPStatus.METHOD_NOT_ALLOWED,
         ]
 
     def test_get_without_filter_with_success(self, client):
         expected_data = [
-            {'uuid': 'PHARM0001', 'name': 'DROGA MAIS', 'city': 'RIBEIRAO PRETO'},
-            {'uuid': 'PHARM0002', 'name': 'DROGA MAIS', 'city': 'SAO PAULO'},
-            {'uuid': 'PHARM0003', 'name': 'DROGARIA SAO SIMAO', 'city': 'SAO PAULO'}
+            {"uuid": "PHARM0001", "name": "DROGA MAIS", "city": "RIBEIRAO PRETO"},
+            {"uuid": "PHARM0002", "name": "DROGA MAIS", "city": "SAO PAULO"},
+            {"uuid": "PHARM0003", "name": "DROGARIA SAO SIMAO", "city": "SAO PAULO"},
         ]
 
         response = client.get("/api/pharmacies")
@@ -33,8 +32,8 @@ class TestPharmaciesResource:
 
     def test_get_with_name_filter_with_success(self, client):
         expected_data = [
-            {'uuid': 'PHARM0001', 'name': 'DROGA MAIS', 'city': 'RIBEIRAO PRETO'},
-            {'uuid': 'PHARM0002', 'name': 'DROGA MAIS', 'city': 'SAO PAULO'}
+            {"uuid": "PHARM0001", "name": "DROGA MAIS", "city": "RIBEIRAO PRETO"},
+            {"uuid": "PHARM0002", "name": "DROGA MAIS", "city": "SAO PAULO"},
         ]
 
         response = client.get("/api/pharmacies?name=droga MAIS")
@@ -42,8 +41,11 @@ class TestPharmaciesResource:
 
     def test_get_with_bad_requests(self, client):
         expected_data = {
-            'error_message': {'city': ['Length must be between 3 and 50.']}
+            "error_message": {"city": ["Length must be between 3 and 50."]}
         }
 
         response = client.get("/api/pharmacies?city=a")
-        assert (response.json, response.status_code) == (expected_data, HTTPStatus.BAD_REQUEST)
+        assert (response.json, response.status_code) == (
+            expected_data,
+            HTTPStatus.BAD_REQUEST,
+        )

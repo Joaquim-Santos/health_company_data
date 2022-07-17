@@ -8,8 +8,8 @@ from health_company_data_api.common.exceptions import BadRequest
 
 
 class SignUpResource(AbstractResource):
-    service_module = 'health_company_data_api.services.users'
-    service_class = 'UsersService'
+    service_module = "health_company_data_api.services.users"
+    service_class = "UsersService"
 
     @validate_request
     @swag_from("../swagger/models/signup/signup.yml", endpoint="api.signup")
@@ -17,7 +17,7 @@ class SignUpResource(AbstractResource):
         user_schema = UserPostSchema()
         try:
             user_credentials = {
-                'authorization': self.get_headers_request().get('Authorization', '')
+                "authorization": self.get_headers_request().get("Authorization", "")
             }
             user = user_schema.load(user_credentials)
         except ValidationError as error:
