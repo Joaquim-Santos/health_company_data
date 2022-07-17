@@ -178,3 +178,19 @@ A arquitetura da aplicação seguiu uma divisão em camadas, segundo padrão do 
 
 * Foram criados handlers personalizados para tratar as exceções conhecidas da API, assim como construídas classes de exceções personalizadas.
 * Os dados enviados na requisição à um endpoint são validados, a fim de identificar e informar problemas em parâmetros recebidos (e.g. campos de data em formato inválido, campo com valor de string ao invés de numérico, etc.)
+
+## Padrões e estilos de código.
+
+Foram adicionados arquivos para configuração de **pre-commit**, **flake8** e **black**, a fim de realizar a verificação e manutenção da qualidade do código automaticamente. Assim sendo, ao realizar um commit, será executada a verificação do black, a qual irá, de forma automática, corrigir problemas de formatação e padronização de código, segundo boas práticas. Em seguida, será feita a verificação pelo flake8, a qual irá informar possíveis erros de padronização, segundo as recomendações do **PEP8**. Dessa forma, todos os erros devem ser corrigidos para possibilitar o commit, garantindo a qualidade do código.
+
+Essas configurações foram definidas nos arquivos **.pre-commit-config.yaml, .flake8 e .pyproject.toml**, os quais devem estar sempre na raíz do projeto. Para instalar e atualizar o pre-commit, utilizar:
+
+1. pre-commit install 
+2. pip install --upgrade pre-commit
+3. pre-commit autoupdate
+
+Feito isso, todas as verificações serão executadas nos commits. Para executá-las manualmente, usar o comando:
+ - pre-commit run --all-files
+ 
+ No arquivo do flake8, foram informados alguns erros para serem ignorados, segundo os códigos de erro do PEP8, listado em: https://flake8.pycqa.org/en/2.5.5/warnings.html#error-codes
+ 
