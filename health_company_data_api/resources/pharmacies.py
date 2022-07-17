@@ -9,15 +9,17 @@ from health_company_data_api.common.exceptions import BadRequest
 
 
 class PharmaciesResource(AbstractResource):
-    service_module = 'health_company_data_api.services.pharmacies'
-    service_class = 'PharmaciesService'
+    service_module = "health_company_data_api.services.pharmacies"
+    service_class = "PharmaciesService"
 
     @validate_request
-    @swag_from("../swagger/models/pharmacies/pharmacies-get.yml", endpoint="api.pharmacies")
+    @swag_from(
+        "../swagger/models/pharmacies/pharmacies-get.yml", endpoint="api.pharmacies"
+    )
     def get(self, **kwargs):
         pharmacies_filters = {
-            'name': request.args.get('name'),
-            'city': request.args.get('city')
+            "name": request.args.get("name"),
+            "city": request.args.get("city"),
         }
 
         patients_filters_schema = PharmaciesFiltersSchema()

@@ -9,14 +9,14 @@ class BaseConfig:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///../company_data.db'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///../company_data.db"
 
     LOGS_FOLDER = os.environ.get("LOGS_FOLDER")
 
     SWAGGER = {
-        'title': "Health Company Data",
-        'version': 1,
-        'description': "Health Company Data Endpoints"
+        "title": "Health Company Data",
+        "version": 1,
+        "description": "Health Company Data Endpoints",
     }
 
 
@@ -26,7 +26,7 @@ class TestConfig(BaseConfig):
 
     SQLALCHEMY_ECHO = True
 
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///../tests/databases/company_data_test.db'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///../tests/databases/company_data_test.db"
 
 
 class LocalConfig(BaseConfig):
@@ -44,5 +44,7 @@ class ProductionConfig(BaseConfig):
 
 
 def get_config():
-    return getattr(importlib.import_module('health_company_data_api.configurations.config'),
-                   os.environ['STAGE'].capitalize() + 'Config')
+    return getattr(
+        importlib.import_module("health_company_data_api.configurations.config"),
+        os.environ["STAGE"].capitalize() + "Config",
+    )

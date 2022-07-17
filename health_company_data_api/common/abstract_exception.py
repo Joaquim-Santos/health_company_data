@@ -1,23 +1,22 @@
-
-
 class AbstractException(Exception):
     """
-        Classe abstrata para criar exceções.
+    Classe abstrata para criar exceções.
 
-        Parameters
-        ----------
-        message: str
-            Messagem a ser exibida quando a exceção é lançada.
-            Default: Campo não pode ser branco.
+    Parameters
+    ----------
+    message: str
+        Messagem a ser exibida quando a exceção é lançada.
+        Default: Campo não pode ser branco.
 
-        status_code: int
-            Código de status HTTP.
-            Default: 500
+    status_code: int
+        Código de status HTTP.
+        Default: 500
 
-        payload: dict
-            Dados de payload para envio na resposta da exceção.
+    payload: dict
+        Dados de payload para envio na resposta da exceção.
     """
-    def __init__(self, message='Exceção abstrata.', status_code=500, payload=None):
+
+    def __init__(self, message="Exceção abstrata.", status_code=500, payload=None):
         super().__init__(message)
         self.message = message
         if status_code is not None:
@@ -26,13 +25,13 @@ class AbstractException(Exception):
 
     def to_dict(self):
         """
-            Método para criar um dicionário a partir do objedo da exceção.
+        Método para criar um dicionário a partir do objedo da exceção.
 
-            Returns
-            ----------
-            dict
-                { 'error_message': self.message } + self.payload
+        Returns
+        ----------
+        dict
+            { 'error_message': self.message } + self.payload
         """
         return_value = dict(self.payload or ())
-        return_value['error_message'] = self.message
+        return_value["error_message"] = self.message
         return return_value

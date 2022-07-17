@@ -23,13 +23,15 @@ class Logger:
             os.mkdir(config.LOGS_FOLDER)
 
         log_file_name = os.path.join(config.LOGS_FOLDER, file_name)
-        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        )
         file_handler = TimedRotatingFileHandler(
             log_file_name,
             when="midnight",
             interval=1,
             encoding="UTF-8",
-            backupCount=365
+            backupCount=365,
         )
         file_handler.suffix = "%Y%m%d"
         file_handler.setLevel(level)

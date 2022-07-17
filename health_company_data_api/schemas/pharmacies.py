@@ -2,8 +2,12 @@ from marshmallow import Schema, fields, EXCLUDE, validate, post_load
 
 
 class PharmaciesFiltersSchema(Schema):
-    name = fields.Str(required=False, validate=[validate.Length(min=3, max=50)], allow_none=True)
-    city = fields.Str(required=False, validate=[validate.Length(min=3, max=50)], allow_none=True)
+    name = fields.Str(
+        required=False, validate=[validate.Length(min=3, max=50)], allow_none=True
+    )
+    city = fields.Str(
+        required=False, validate=[validate.Length(min=3, max=50)], allow_none=True
+    )
 
     class Meta:
         unknown = EXCLUDE

@@ -9,17 +9,17 @@ from health_company_data_api.common.exceptions import BadRequest
 
 
 class PatientsResource(AbstractResource):
-    service_module = 'health_company_data_api.services.patients'
-    service_class = 'PatientsService'
+    service_module = "health_company_data_api.services.patients"
+    service_class = "PatientsService"
 
     @validate_request
     @swag_from("../swagger/models/patients/patients-get.yml", endpoint="api.patients")
     def get(self, **kwargs):
         patients_filters = {
-            'first_name': request.args.get('first_name'),
-            'last_name': request.args.get('last_name'),
-            'start_age': request.args.get('start_age'),
-            'end_age': request.args.get('end_age')
+            "first_name": request.args.get("first_name"),
+            "last_name": request.args.get("last_name"),
+            "start_age": request.args.get("start_age"),
+            "end_age": request.args.get("end_age"),
         }
 
         patients_filters_schema = PatientsFiltersSchema()

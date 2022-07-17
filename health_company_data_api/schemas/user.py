@@ -16,8 +16,9 @@ class UserPostSchema(Schema):
     @pre_load
     def pre_load(self, data, many, **kwargs):
         try:
-            data['username'], data['password'] = Utils.get_decoded_user_and_password(data['authorization'])\
-                .values()
+            data["username"], data["password"] = Utils.get_decoded_user_and_password(
+                data["authorization"]
+            ).values()
         except KeyError:
             raise ValidationError("Campo de autorização não informado.")
 
@@ -25,12 +26,17 @@ class UserPostSchema(Schema):
 
     @post_load
     def post_load(self, data, many, **kwargs):
-        user_criteria = Utils.username_check(data['username'])
-        password_criteria = Utils.password_check(data['password'])
+        user_criteria = Utils.username_check(data["username"])
+        password_criteria = Utils.password_check(data["password"])
 
         if not user_criteria:
-            raise BadRequest('Nome de usuário pode conter apenas letras, números e underline.')
-        if not password_criteria['password_ok']:
-            raise BadRequest('Senha não atende aos critérios de segurança.', payload=password_criteria)
+            raise BadRequest(
+                "Nome de usuário pode conter apenas letras, números e underline."
+            )
+        if not password_criteria["password_ok"]:
+            raise BadRequest(
+                "Senha não atende aos critérios de segurança.",
+                payload=password_criteria,
+            )
 
         return data
