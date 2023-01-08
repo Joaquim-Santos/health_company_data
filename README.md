@@ -133,7 +133,7 @@ Para todas as rotas foi definido um **blueprint** /api, sendo que as rotas dispo
 
 ## Logs
 
-Foi implementado um módulo para geração de **Logs** da aplicaçã.o de modo que são gerados arquivos de Log correspondentes ao dia em que a aplicação é acessada. O módulo de Log é configurado para que, a cada dia, seja usado um arquivo diferente para o registro, mantendo melhor rastreabilidade. Isso foi feito pensando em como seria útil para um ambiente de produção e desenvolvimento.  
+Foi implementado um módulo para geração de **Logs** da aplicação de modo que são gerados arquivos de Log correspondentes ao dia em que a aplicação é acessada. O módulo de Log é configurado para que, a cada dia, seja usado um arquivo diferente para o registro, mantendo melhor rastreabilidade. Isso foi feito pensando em como seria útil para um ambiente de produção e desenvolvimento.  
 
 Portanto, ao acessar uma endpoint, são gravados os erros que podem ocorrer, assim como dados recebidos da requisição e enviados na resposta.
 
