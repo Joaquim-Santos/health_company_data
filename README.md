@@ -1,6 +1,6 @@
 # health_company_data
 
-Este projeto consiste em uma API REST privada para fornecimento de informações cadastrais e financeiras de uma empresa de saúde. O Objetivo é permitir requisições que seriam feiats pelo setor financeiro da empresa, para acesso à informações de pacientes/clientes e farmácias da mesma, bem como de transações realizadas entre esses. Para tanto, o projeto foi implementado utilizando um servidor Flask, o qual disponibiliza os endpoints que são responsáveis por fornecer esses dados, ao passo em que realiza a autenticação do usuário.
+Este projeto consiste em uma API REST privada para fornecimento de informações cadastrais e financeiras de uma empresa de saúde. O Objetivo é permitir requisições que seriam feitas pelo setor financeiro da empresa, para acesso à informações de pacientes/clientes e farmácias da mesma, bem como de transações realizadas entre esses. Para tanto, o projeto foi implementado utilizando um servidor Flask, o qual disponibiliza os endpoints que são responsáveis por fornecer esses dados, ao passo em que realiza a autenticação do usuário.
 
 # Dependências
 
